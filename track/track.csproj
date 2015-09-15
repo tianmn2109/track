@@ -179,6 +179,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\format.css" />
+    <Content Include="Content\navigataur.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -252,8 +254,11 @@
     <Content Include="Views\Track\Waitting.cshtml" />
     <Content Include="Views\Track\Prod.cshtml" />
     <Content Include="Views\Track\Exit_review.cshtml" />
-    <Content Include="Views\Track\Done.cshtml" />
+    <Content Include="Views\Track\stage.cshtml" />
     <Content Include="Views\Track\getJson.cshtml" />
+    <Content Include="Views\Track\schedule.cshtml" />
+    <Content Include="Views\Track\resource.cshtml" />
+    <Content Include="Views\Track\other.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

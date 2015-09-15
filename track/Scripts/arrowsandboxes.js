@@ -559,13 +559,14 @@
 	*/
     var poweredBy = function (pre_code) {
         // TODO set link to project page, please ;)
-        var editor_url = "http://www.headjump.de/article/arrows-and-boxes-editor"; //"preview-editor.html"
+      /*  var editor_url = "http://www.headjump.de/article/arrows-and-boxes-editor"; //"preview-editor.html"
         return $('<div class="' + cssclass("powered-by") + '"><a href="' + editor_url + '?g=' + pre_code + '">Edit<span> in preview editor</span></a><span> | <a href="http://www.headjump.de/article/arrows-and-boxes" ' +
 					'title="Javascript graph construction, node visualization, arrow drawing by headjump.de">' +
 					'Made with Arrows-and-boxes</a></span></div>').hover(
 						function () { $(this).addClass(cssclass("powered-by-hovered")); },
 						function () { $(this).removeClass(cssclass("powered-by-hovered")); }
 					);
+    */
     }
 
     /**
@@ -837,14 +838,14 @@
 			);
         } catch (e) {
             var error_d = $('<div class="' + cssclass("error") + '"><p>Something went wrong: <code>' + deEscape("" + e) + '</code></p></div>');
-            error_d.append('<p>Hint:</p><ul>' +
+     /*       error_d.append('<p>Hint:</p><ul>' +
 							'<li>To use HTML (e.g. for links, images) or any arrows-and-boxes specific character ("&gt;", "&lt";, "-", ":", "(", ")", "{", "}", "[", "]", "|") in your nodes or labels, put "{{" and "}}" around them.</li>' +
 							'<li>See <a href="http://www.headjump.de/article/arrows-and-boxes" title="arrows-and-boxes documentation">Arrows-and-boxes documentation</a></li>' +
 							'<li>Immediately see what your graph will look like and if it works: <a href="http://www.headjump.de/article/arrows-and-boxes-editor" title="arrows-and-boxes preview editor">Preview editor</a></li></ul>');
             el.after(error_d);
             el.removeClass(cssclass("source"));
             el.addClass(cssclass("source-with-errors"));
-        }
+       */ }
 
     };
 

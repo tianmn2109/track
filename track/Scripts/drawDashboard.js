@@ -70,7 +70,8 @@ function getPercents() {
 
             // });
 
-            drawPercents(data);
+             drawPercents(data);
+             drawPercents2(data);
             //       drawWeeks2(data);
 
         }
@@ -109,6 +110,130 @@ function getFC() {
            // drawBubble(parseData);
             drawBubble(parseData);
            // drawPercents(data);
+            //       drawWeeks2(data);
+
+        }
+    })
+
+}
+
+function getTFSRelease() {
+    console.log("hello for tfs release");
+    // $.getJSON('./Track/getJson', function (data) {
+    $.ajax({
+        url: "/Track/responseTFSRelease",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+             console.log("hello for tfs");
+             console.log(data);
+
+            //  var d = JSON.parse(data, function (key, value) {
+
+            //        return value;
+
+            // });
+
+            TFSReleaseTable(data);
+            //       drawWeeks2(data);
+
+        }
+    })
+
+}
+
+function getCommingWeek()
+{
+    $.ajax({
+        url: "/Track/responseCommingTable",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            //      drawWeeks(data);
+            console.log("hello for get comming week");
+            console.log(data);
+            drawWeeks3(data);
+
+        }
+    })
+}
+
+function getGoOutWeek() {
+    $.ajax({
+        url: "/Track/responseGoOutTable",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            //      drawWeeks(data);
+            console.log("hello for get go out week");
+            console.log(data);
+            drawWeeks4(data);
+
+        }
+    })
+}
+
+function getPersonFeatures() {
+    console.log("hello for get person f1");
+    $.ajax({
+        url: "/Track/responsePersonFeature",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            //      drawWeeks(data);
+            console.log("hello for get person feature");
+            console.log(data);
+            //drawWeeks4(data);
+            drawPersonTable(data);
+        }
+    })
+}
+
+function getProjFeatures() {
+    console.log("hello for get person f1");
+    $.ajax({
+        url: "/Track/responseFeatureAttr",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            //      drawWeeks(data);
+            console.log("hello for get person feature");
+            console.log(data);
+            //drawWeeks4(data);
+            // drawPersonTable(data);
+            drawFeatureTable(data);
+        }
+    })
+}
+
+function getNeedResources() {
+    console.log("hello for resources");
+    // $.getJSON('./Track/getJson', function (data) {
+    $.ajax({
+        url: "/Track/responseNeedResource",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            // console.log("hello for test");
+            // console.log(data);
+
+            //  var d = JSON.parse(data, function (key, value) {
+
+            //        return value;
+
+            // });
+
+            drawPie(data);
             //       drawWeeks2(data);
 
         }
@@ -191,7 +316,8 @@ function drawWeeks(data) {
             categories: featureName,
             title: {
                 text: null
-            }
+            },
+            
         },
         yAxis: {
             min: 0,
@@ -201,7 +327,7 @@ function drawWeeks(data) {
             },
             labels: {
                 overflow: 'justify'
-            }
+            },
         },
         tooltip: {
             valueSuffix: ' weeks'
@@ -229,6 +355,7 @@ function drawWeeks(data) {
         },
         series: dataWeeks
     });
+
 }
 
 function drawWeeks2(data) {
@@ -303,7 +430,7 @@ function drawWeeks2(data) {
                 text: 'Features Schedule status'
             },
             xAxis: {
-                categories: featureName
+                categories: featureName,
             },
             yAxis: {
                 min: 0,
@@ -316,7 +443,7 @@ function drawWeeks2(data) {
                         fontWeight: 'bold',
                         color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
                     }
-                }
+                },
             },
             legend: {
                 align: 'right',
@@ -348,6 +475,190 @@ function drawWeeks2(data) {
             series: dataWeeks,
         });
    // });
+}
+
+function drawWeeks3(data) {
+    console.log("XXXXXX draw weeks 3");
+    console.log(data);
+    var parseData = JSON.parse(data, function (key, value) {
+        if (key == "week") {
+            return parseInt(value);
+        }
+        else {
+            return value;
+        }
+    });
+    console.log("()()()(");
+    console.log(parseData);
+    var featureName = new Array();
+    var comming = new Array();
+    var dataWeeks = new Array();
+   
+    for (i = 0; i < parseData.length; i++) {
+        featureName[i] = parseData[i]["featureName"];
+        comming[i] = parseData[i]["week"];
+    }
+    console.log(featureName);
+    console.log(comming);
+    var com = new Array();
+    com[0] = comming;
+    dataWeeks[0] = {
+        name: 'Comming features',
+        data: comming
+    };
+    console.log("%%%%%%%");
+    //    console.log(dataWeeks[0]["name"].toString());
+    //    console.log(dataWeeks[0]["currentStageWeeks"].toString());
+    /*featureName = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+    dataWeeks = [{
+        name: 'Year 1800',
+        data: [107, 31, 635, 203, 2]
+    }, {
+        name: 'Year 1900',
+        data: [133, 156, 947, 408, 6]
+    }, {
+        name: 'Year 2012',
+        data: [1052, 954, 4250, 740, 38]
+    }];
+    */
+    $('#container8').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Features will come'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: featureName,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            tickInterval: 1,
+            title: {
+                text: 'time (weeks)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' weeks'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: dataWeeks
+    });
+}
+
+
+function drawWeeks4(data) {
+    console.log("XXXXXX draw weeks 4");
+    console.log(data);
+    var parseData = JSON.parse(data, function (key, value) {
+        if (key == "week") {
+            return parseInt(value);
+        }
+        else {
+            return value;
+        }
+    });
+    console.log("()()()(");
+    console.log(parseData);
+    var featureName = new Array();
+    var goout = new Array();
+    var dataWeeks = new Array();
+
+    for (i = 0; i < parseData.length; i++) {
+        featureName[i] = parseData[i]["featureName"];
+        goout[i] = parseData[i]["week"];
+    }
+    console.log(featureName);
+    //console.log(comming);
+    dataWeeks[0] = {
+        name: 'Go out features',
+        data: goout
+    };
+    console.log("%%%%%%%");
+
+    $('#container9').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Features will go out'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: featureName,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            tickInterval: 1,
+            title: {
+                text: 'time (weeks)',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' weeks'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: dataWeeks
+    });
 }
 
 function drawPercents(data)
@@ -459,6 +770,116 @@ function drawPercents(data)
     });
 }
 
+
+function drawPercents2(data) {
+    console.log("&&&&&&&&&&&&&&&&&&&&&");
+    console.log(data);
+    var parseData = JSON.parse(data, function (key, value) {
+        if (key == "prevPercent") {
+            return parseFloat(value);
+        }
+        else if (key == "curPercent") {
+            return parseFloat(value);
+        }
+        else {
+            return value;
+        }
+    });
+
+    var featureName = new Array();
+    var prevPercentArr = new Array();
+    var curPercentArr = new Array();
+
+    for (i = 0; i < parseData.length; i++) {
+        featureName[i] = parseData[i]["featureName"];
+        prevPercentArr[i] = parseData[i]["prevPercent"];
+        curPercentArr[i] = parseData[i]["curPercent"];
+    }
+    console.log("%%%%%%%");
+
+    /*
+    var featureName = [
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday',
+                    'Sunday'
+    ];
+    var featureData = [{
+        name: 'John',
+        data: [3, 4, 3, 5, 4, 10, 12]
+    }, {
+        name: 'Jane',
+        data: [1, 3, 4, 3, 3, 5, 4]
+    }];
+    */
+    var featureData = new Array();
+    featureData[0] = {
+        name: 'previous',
+        color: "##0094ff",
+        data: prevPercentArr
+    };
+    featureData[1] = {
+        name: 'current',
+        data: curPercentArr
+    };
+
+    console.log(featureName);
+    console.log(featureData);
+    $(function () {
+        $('#container3_2').highcharts({
+            chart: {
+                type: 'area',
+                inverted: false
+            },
+            title: {
+                text: 'Features experiments update'
+            },
+            subtitle: {
+                style: {
+                    position: 'absolute',
+                    right: '0px',
+                    bottom: '10px'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            xAxis: {
+                categories: featureName
+            },
+            yAxis: {
+                title: {
+                    text: 'percents'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                },
+                min: 0,
+                max: 100
+            },
+            plotOptions: {
+                area: {
+                    fillOpacity: 0.5
+                }
+            },
+            series: featureData
+        });
+    });
+}
+
+
 function parseFeartureName(featureName, name) {
     num = 0;
     for (num = 1; num < featureName.length; num++)
@@ -540,7 +961,7 @@ function drawBubble(data)
             },
 
             title: {
-                text: 'person in features'
+                text: 'Person in features'
             },
 
             xAxis: {
@@ -562,7 +983,7 @@ function drawBubble(data)
             tooltip:{
                 formatter:function(){
 		
-                    return Highcharts.dateFormat("%b %e, %Y", this.x) + "<br/>" + "feature name: " + featureName[this.y];
+                    return "free until: " + Highcharts.dateFormat("%b %e, %Y", this.x) + "<br/>" + "feature name: " + featureName[this.y];
                 }
             },
 
@@ -572,3 +993,421 @@ function drawBubble(data)
         });
 
 }
+function testh()
+{}
+
+function TFSReleaseTable(data) {
+    // 使用 $("<table></table>") 生成一个 table
+    var parseData = JSON.parse(data, function (key, value) {
+
+        return value;
+    });
+    console.log(parseData);
+    console.log("table--------");
+    var tab = $("<table class=\"table\"></table>");
+    tab.append("<p>TFS Release Information </p>");
+    var headTitle = $("<tr></tr>");
+    headTitle.append("<th>Release Number</th>");
+    headTitle.append("<th>Release Date</th>");
+    tab.append(headTitle);
+    for (var i = 0; i < parseData.length; i++) {
+        // 每次生成一个 <tr></tr>
+        var row = $("<tr></tr>");
+
+
+        row.append($("<td>" + parseData[i]["releaseNum"] + "</td>"));
+        row.append($("<td>" + parseData[i]["releaseDate"] + "</td>"));
+
+        // 给 <table></table> 每次循环添加上边的 <tr>****</tr>
+        tab.append(row);
+    }
+
+    console.log(tab);
+    $("#tableTFS").append(tab);
+
+}
+
+function drawPie(data) {
+    console.log("@@@##############@@@@@");
+    console.log(data);
+
+    var parseData = JSON.parse(data, function (key, value) {
+        if (key == "personNeed") {
+            return parseInt(value);
+        }
+        else {
+            return value;
+        }
+    });
+    console.log(parseData);
+    var arr = new Array();
+    for (i = 0; i < parseData.length; i++) {
+        arr[i] = {
+            name: parseData[i]["featureName"],
+            y: parseData[i]["personNeed"]
+        };
+        console.log(arr[i]);
+    }
+ /*   parseData = [{
+        name: "Microsoft Internet Explorer",
+        y: 56.33
+    }, {
+        name: "Chrome",
+        y: 24.03,
+        sliced: true,
+        selected: true
+    }, {
+        name: "Firefox",
+        y: 10.38
+    }, {
+        name: "Safari",
+        y: 4.77
+    }, {
+        name: "Opera",
+        y: 0.91
+    }, {
+        name: "Proprietary or Undetectable",
+        y: 0.2
+    }];
+   */
+    console.log(arr);
+    seri = [{
+        name: "Person: ",
+        colorByPoint: true,
+        data: arr
+    }];
+  //  console.log(seri);
+    $(function () {
+        $('#container6').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Features need resources'
+            },
+            tooltip: {
+                pointFormat: ' {series.name}: <b>{point.y} person</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.y} person',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: seri
+        });
+    });
+}
+
+
+function drawPersonTable(data) {
+    // 使用 $("<table></table>") 生成一个 table
+    var parseData = JSON.parse(data, function (key, value) {
+
+        return value;
+    });
+    console.log(parseData);
+    console.log("table--------");
+    var tab = $("<table class=\"table\"></table>");
+    tab.append("<p>Person information </p>");
+    var headTitle = $("<tr></tr>");
+    headTitle.append("<th>Person name</th>");
+    headTitle.append("<th>Feature Name</th>");
+    headTitle.append("<th>Release Date</th>");
+    tab.append(headTitle);
+    for (var i = 0; i < parseData.length; i++) {
+        // 每次生成一个 <tr></tr>
+        
+        var row = "<tr>";
+        var num = parseData[i]["pair"].length;
+        
+        //row.append($("<td rowspan=" + num + ">" + parseData[i]["name"] + "</td>"));
+     //   row.append($("<td >" + parseData[i]["name"] + "</td>"));
+     //   row.append($("<td>" + parseData[i]["pair"][0]["featureName"] + "</td>"));
+        //  row.append($("<td>" + parseData[i]["pair"][0]["releaseDate"] + "</td>"));
+        num = parseData[i]["pair"].length;
+        for (j = 0; j < parseData[i]["pair"].length; j++) {
+            if (j == 0) {
+                row += "<td rowspan=" + num  + ">" + parseData[i]["name"] + "</td>";
+            }
+            row += "<td>" + parseData[i]["pair"][j]["featureName"] + "</td>";
+            row += "<td>" + parseData[i]["pair"][j]["releaseDate"] + "</td>";
+            row += "</tr>";
+    }
+       
+
+        // 给 <table></table> 每次循环添加上边的 <tr>****</tr>
+        tab.append(row);
+    }
+    // 最后把生成的 <table>***</table> 放到 id=div 的控件中
+   // document.getElementById("tablePerson").innerHTML = "";
+    //     document.getElementById("table").write(features);
+    // document.getElementById("table").innerHTML = tab;
+    console.log(tab);
+    $("#tablePerson").append(tab);
+
+}
+
+function drawFeatureTable(data) {
+    // 使用 $("<table></table>") 生成一个 table
+    var parseData = JSON.parse(data, function (key, value) {
+
+        return value;
+    });
+    console.log(parseData);
+    console.log("table--------");
+    var tab = $("<table class=\"table\"></table>");
+    tab.append("<p>Features' information </p>");
+    var headTitle = $("<tr></tr>");
+    headTitle.append("<th>Feature name</th>");
+    headTitle.append("<th>Person Name</th>");
+    headTitle.append("<th>Release Date</th>");
+    tab.append(headTitle);
+    for (var i = 0; i < parseData.length; i++) {
+        // 每次生成一个 <tr></tr>
+
+        var row = "<tr>";
+        var num = parseData[i]["pair"].length;
+
+        //row.append($("<td rowspan=" + num + ">" + parseData[i]["name"] + "</td>"));
+        //   row.append($("<td >" + parseData[i]["name"] + "</td>"));
+        //   row.append($("<td>" + parseData[i]["pair"][0]["featureName"] + "</td>"));
+        //  row.append($("<td>" + parseData[i]["pair"][0]["releaseDate"] + "</td>"));
+        num = parseData[i]["pair"].length;
+        for (j = 0; j < parseData[i]["pair"].length; j++) {
+            if (j == 0) {
+                row += "<td rowspan=" + num + ">" + parseData[i]["featureName"] + "</td>";
+            }
+            row += "<td>" + parseData[i]["pair"][j]["personName"] + "</td>";
+            row += "<td>" + parseData[i]["pair"][j]["releaseDate"] + "</td>";
+            row += "</tr>";
+        }
+
+
+        // 给 <table></table> 每次循环添加上边的 <tr>****</tr>
+        tab.append(row);
+    }
+    // 最后把生成的 <table>***</table> 放到 id=div 的控件中
+  //  document.getElementById("tableFeature").innerHTML = "";
+    //     document.getElementById("table").write(features);
+    // document.getElementById("table").innerHTML = tab;
+    console.log(tab);
+    $("#tableFeature").append(tab);
+
+}
+
+function createCalendar() {
+    new Calendar({
+        element: $(".daterange--double"),
+        earliest_date: new Date("January 1, 2000"),
+        latest_date: new Date, start_date:
+            new Date("May 1, 2015"),
+        end_date: new Date("May 31, 2015"),
+        callback: function () {
+            var ee = moment(this.start_date).format("ll"),
+                a = moment(this.end_date).format("ll");
+            console.log("Start Date: " + e + "\nEnd Date: " + a);
+            //var requestURL = 'http://localhost:32020/Track/refreshComming';
+
+            var e = document.getElementById("dropbox");
+            console.log("---------------");
+            console.log(e);
+            var strSelect = e.options[e.selectedIndex].text;
+            console.log("---------------");
+            console.log(strSelect);
+            var requestURL = createXmlHttpRequest();
+            if (strSelect == "Comming") {
+                requestURL = 'http://localhost:32020/Track/refreshComming';
+                //   requestURL.onreadystatechange = createCommingTable();
+            }
+            else if (strSelect == "Go Out") {
+                requestURL = 'http://localhost:32020/Track/refreshGoOut';
+                // requestURL.onreadystatechange = createGoOutTable();
+            }
+            else {
+            }
+            requestURL = addURLParam(requestURL, "startDate", ee);
+            requestURL = addURLParam(requestURL, "endDate", a);
+            console.log(requestURL);
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("get", requestURL, false);
+            xmlhttp.send();
+            if (strSelect == "Comming") {
+                createCommingTable();
+            }
+            else if (strSelect == "Go Out") {
+                createGoOutTable();
+            }
+            else {
+            }
+            //     createTable();
+        }
+    });
+}
+
+function createStageCalendar() {
+    new Calendar({
+        element: $(".daterange--double"),
+        earliest_date: new Date("January 1, 2000"),
+        latest_date: new Date, start_date:
+            new Date("May 1, 2015"),
+        end_date: new Date("May 31, 2015"),
+        callback: function () {
+           
+           
+
+            //     createTable();
+        }
+    });
+}
+
+
+var global_i = 9;
+
+function createTable() {
+
+    // 使用 $("<table></table>") 生成一个 table
+    console.log("table--------");
+    var tab = $("<table class=\"table\"></table>");
+
+    var headTitle = $("<tr></tr>");
+    headTitle.append("<th>feature</th>");
+    headTitle.append("<th>current stage</th>");
+    headTitle.append("<th>expected stage</th>");
+    headTitle.append("<th>delay weeks</th>");
+    tab.append(headTitle);
+    // 3 行循环3次'
+    global_i--;
+    for (var i = 1; i <= global_i; i++) {
+        // 每次生成一个 <tr></tr>
+        var row = $("<tr></tr>");
+        // 4 列循环 4 次
+        for (var j = 1; j <= 4; j++) {
+            // 给 <tr></tr> append（添加）  <td>i行j列</td>
+            row.append($("<td>" + i + "行" + j + "列" + "</td>"));
+        }
+        // 给 <table></table> 每次循环添加上边的 <tr>****</tr>
+        tab.append(row);
+    }
+    // 最后把生成的 <table>***</table> 放到 id=div 的控件中
+    document.getElementById("table").innerHTML = "";
+    //     document.getElementById("table").write(features);
+    // document.getElementById("table").innerHTML = tab;
+    $("#table").append(tab);
+}
+
+function createCommingTable() {
+    console.log("hello for comming");
+    // $.getJSON('./Track/getJson', function (data) {
+    $.ajax({
+        url: "/Track/responseCommingTable",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            //      drawWeeks(data);
+
+            console.log(data);
+            commingTable(data);
+
+        }
+    })
+}
+
+function createGoOutTable() {
+    console.log("hello for go out");
+    // $.getJSON('./Track/getJson', function (data) {
+    $.ajax({
+        url: "/Track/responseGoOutTable",
+        async: false,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+            //      drawWeeks(data);
+            console.log(data);
+            goOutTable(data);
+        }
+    })
+}
+
+function commingTable(data) {
+    // 使用 $("<table></table>") 生成一个 table
+    var parseData = JSON.parse(data, function (key, value) {
+
+        return value;
+    });
+    console.log(parseData);
+    console.log("table--------");
+    var tab = $("<table class=\"table\"></table>");
+
+    var headTitle = $("<tr></tr>");
+    headTitle.append("<th>Feature</th>");
+    headTitle.append("<th>Comming Date</th>");
+    tab.append(headTitle);
+    for (var i = 0; i < parseData.length; i++) {
+        // 每次生成一个 <tr></tr>
+        var row = $("<tr></tr>");
+
+
+        row.append($("<td>" + parseData[i]["featureName"] + "</td>"));
+        row.append($("<td>" + parseData[i]["commingDate"] + "</td>"));
+
+        // 给 <table></table> 每次循环添加上边的 <tr>****</tr>
+        tab.append(row);
+    }
+    // 最后把生成的 <table>***</table> 放到 id=div 的控件中
+    document.getElementById("table").innerHTML = "";
+    //     document.getElementById("table").write(features);
+    // document.getElementById("table").innerHTML = tab;
+    console.log(tab);
+    $("#table").append(tab);
+
+}
+
+function goOutTable(data) {
+    // 使用 $("<table></table>") 生成一个 table
+    var parseData = JSON.parse(data, function (key, value) {
+
+        return value;
+    });
+    console.log(parseData);
+    console.log("table--------");
+    var tab = $("<table class=\"table\"></table>");
+
+    var headTitle = $("<tr></tr>");
+    headTitle.append("<th>Feature</th>");
+    headTitle.append("<th>Go Out Date</th>");
+    tab.append(headTitle);
+    for (var i = 0; i < parseData.length; i++) {
+        // 每次生成一个 <tr></tr>
+        var row = $("<tr></tr>");
+
+
+        row.append($("<td>" + parseData[i]["featureName"] + "</td>"));
+        row.append($("<td>" + parseData[i]["goOutDate"] + "</td>"));
+
+        // 给 <table></table> 每次循环添加上边的 <tr>****</tr>
+        tab.append(row);
+    }
+    // 最后把生成的 <table>***</table> 放到 id=div 的控件中
+    document.getElementById("table").innerHTML = "";
+    //     document.getElementById("table").write(features);
+    // document.getElementById("table").innerHTML = tab;
+    console.log(tab);
+    $("#table").append(tab);
+
+}
+
+
