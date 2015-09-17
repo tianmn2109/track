@@ -788,26 +788,31 @@ namespace track.Controllers
             f1.featureName = "feature 1";
             f1.goOutDate = "8, 6, 2015";
             f1.week = 1;
+            f1.id = "001";
 
             GoOutTable f2 = new GoOutTable();
             f2.featureName = "feature 2";
             f2.goOutDate = "9, 16, 2015";
             f2.week = 3;
+            f2.id = "002";
 
             GoOutTable f3 = new GoOutTable();
             f3.featureName = "feature 3";
             f3.goOutDate = "9, 26, 2015";
             f3.week = 4;
+            f3.id = "003";
 
             GoOutTable f4 = new GoOutTable();
             f4.featureName = "feature 4";
             f4.goOutDate = "10, 6, 2015";
             f4.week = 2;
+            f4.id = "004";
 
             GoOutTable f5 = new GoOutTable();
             f5.featureName = "feature 5";
             f5.goOutDate = "11, 6, 2015";
             f5.week = 2;
+            f5.id = "005";
 
             List<GoOutTable> list = new List<GoOutTable>();
             list.Add(f1);
@@ -1247,6 +1252,11 @@ namespace track.Controllers
 
     public class GoOutTable
     {
+        public string id
+        {
+            get;
+            set;
+        }
         public string featureName
         {
             get;

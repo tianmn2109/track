@@ -593,10 +593,14 @@ function drawWeeks4(data) {
     var featureName = new Array();
     var goout = new Array();
     var dataWeeks = new Array();
-
+    var featureID = new Array();
+    var featureX = new Array();
+   // featureID[0] = "";
     for (i = 0; i < parseData.length; i++) {
         featureName[i] = parseData[i]["featureName"];
         goout[i] = parseData[i]["week"];
+        featureID[i] = parseData[i]["id"];
+        featureX[i] = { "id": featureID[i], "name": featureName[i] };
     }
     console.log(featureName);
     //console.log(comming);
@@ -617,7 +621,15 @@ function drawWeeks4(data) {
             text: ''
         },
         xAxis: {
-            categories: featureName,
+            categories: featureX,
+            labels : {
+                formatter : function(){
+                    return this.value.id;//这里设置x轴显示的内容,Y轴同理设置yAxis的这个属性
+                },
+                style: { 
+                    fontSize:'12px'
+                }
+            },
             title: {
                 text: null
             }
@@ -631,10 +643,18 @@ function drawWeeks4(data) {
             },
             labels: {
                 overflow: 'justify'
-            }
+            },
+            plotBands: [{
+                from: 3,               // 标示区开始值
+                to: 4,                 // 标示区结束值
+                
+            }]
         },
         tooltip: {
-            valueSuffix: ' weeks'
+            valueSuffix: ' weeks',
+            formatter: function () {
+                return '<span style="font-size: 12px">' + this.x.name + '<br/>' + this.y + 'th week in this month' + '</span>';
+            }
         },
         plotOptions: {
             bar: {
