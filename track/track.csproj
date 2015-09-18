@@ -179,6 +179,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\flat-ui.css" />
     <Content Include="Content\format.css" />
     <Content Include="Content\navigataur.css" />
     <Content Include="favicon.ico" />
@@ -213,6 +214,7 @@
     <Content Include="Views\Track\indexT.cshtml" />
     <Content Include="Views\Track\refresh.cshtml" />
     <Content Include="Scripts\jquery.wz_jsgraphics.js" />
+    <Content Include="Views\Track\back_schedule.cshtml" />
     <None Include="Views\Track\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -259,6 +261,7 @@
     <Content Include="Views\Track\schedule.cshtml" />
     <Content Include="Views\Track\resource.cshtml" />
     <Content Include="Views\Track\other.cshtml" />
+    <Content Include="Views\Track\main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

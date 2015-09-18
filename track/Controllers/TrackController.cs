@@ -590,27 +590,54 @@ namespace track.Controllers
             var res = getFeatures(stageSelected);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        public List<featureWeek> queryFeatureWeeks()
+        public List<StageWeeks> queryFeatureWeeks()
         {
-            featureWeek f1 = new featureWeek();
-            f1.featureName = "feature 1";
-            f1.currentStageWeek = "3";
-            f1.nextStageWeek = "4";
-            f1.delayWeek = "0";
+            /*       featureWeek f1 = new featureWeek();
+                 f1.featureName = "feature 1";
+                 f1.currentStageWeek = "3";
+                 f1.nextStageWeek = "4";
+                 f1.delayWeek = "0";
 
-            featureWeek f2 = new featureWeek();
-            f2.featureName = "feature 2";
-            f2.currentStageWeek = "9";
-            f2.nextStageWeek = "1";
-            f2.delayWeek = "0";
+                 featureWeek f2 = new featureWeek();
+                 f2.featureName = "feature 2";
+                 f2.currentStageWeek = "9";
+                 f2.nextStageWeek = "1";
+                 f2.delayWeek = "0";
 
-            featureWeek f3 = new featureWeek();
-            f3.featureName = "feature 3";
-            f3.currentStageWeek = "12";
-            f3.nextStageWeek = "5";
-            f3.delayWeek = "4";
+                 featureWeek f3 = new featureWeek();
+                 f3.featureName = "feature 3";
+                 f3.currentStageWeek = "12";
+                 f3.nextStageWeek = "5";
+                 f3.delayWeek = "4";
 
-            List<featureWeek> list = new List<featureWeek>();
+                 List<featureWeek> list = new List<featureWeek>();
+                 list.Add(f1);
+                 list.Add(f2);
+                 list.Add(f3);
+               return list;*/
+            
+            StageWeeks f1 = new StageWeeks();
+            f1.ID = "001";
+            f1.name = "feature 1";
+            f1.newWeeks = "4";
+            f1.activeWeeks = "8";
+            f1.delayWeeks = "0";
+
+            StageWeeks f2 = new StageWeeks();
+            f2.ID = "002";
+            f2.name = "feature 2";
+            f2.newWeeks = "3";
+            f2.activeWeeks = "8";
+            f2.delayWeeks = "0";
+
+            StageWeeks f3 = new StageWeeks();
+            f3.ID = "001";
+            f3.name = "feature 1";
+            f3.newWeeks = "2";
+            f3.activeWeeks = "5";
+            f3.delayWeeks = "3";
+
+            List<StageWeeks> list = new List<StageWeeks>();
             list.Add(f1);
             list.Add(f2);
             list.Add(f3);
@@ -618,7 +645,7 @@ namespace track.Controllers
         }
         public ActionResult responseFeatureWeeks()
         {
-            List<featureWeek> list = queryFeatureWeeks();
+            List<StageWeeks> list = queryFeatureWeeks();
             string res = new JavaScriptSerializer().Serialize(list);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
@@ -734,44 +761,46 @@ namespace track.Controllers
 
         public List<CommingTable> queryCommingTable()
         {
-            CommingTable f1 = new CommingTable();
-            f1.featureName = "feature 1";
-            f1.commingDate = "9, 6, 2015";
-            f1.week = 2;
+           
+               CommingTable f1 = new CommingTable();
+               f1.featureName = "feature 1";
+               f1.commingDate = "9, 6, 2015";
+               f1.week = 2;
 
-            CommingTable f2 = new CommingTable();
-            f2.featureName = "feature 2";
-            f2.commingDate = "9, 9, 2015";
-            f2.week = 3;
+               CommingTable f2 = new CommingTable();
+               f2.featureName = "feature 2";
+               f2.commingDate = "9, 9, 2015";
+               f2.week = 3;
 
-            CommingTable f3 = new CommingTable();
-            f3.featureName = "feature 3";
-            f3.commingDate = "10, 3, 2015";
-            f3.week = 1;
+               CommingTable f3 = new CommingTable();
+               f3.featureName = "feature 3";
+               f3.commingDate = "10, 3, 2015";
+               f3.week = 1;
 
-            CommingTable f4 = new CommingTable();
-            f4.featureName = "feature 4";
-            f4.commingDate = "10, 8, 2015";
-            f4.week = 5;
+               CommingTable f4 = new CommingTable();
+               f4.featureName = "feature 4";
+               f4.commingDate = "10, 8, 2015";
+               f4.week = 5;
 
-            CommingTable f5 = new CommingTable();
-            f5.featureName = "feature 5";
-            f5.commingDate = "11, 6, 2015";
-            f5.week = 1;
+               CommingTable f5 = new CommingTable();
+               f5.featureName = "feature 5";
+               f5.commingDate = "11, 6, 2015";
+               f5.week = 1;
 
-            CommingTable f6 = new CommingTable();
-            f6.featureName = "feature 6";
-            f6.commingDate = "12, 9, 2015";
-            f6.week = 4;
+               CommingTable f6 = new CommingTable();
+               f6.featureName = "feature 6";
+               f6.commingDate = "12, 9, 2015";
+               f6.week = 4;
 
-            List<CommingTable> list = new List<CommingTable>();
-            list.Add(f1);
-            list.Add(f2);
-            list.Add(f3);
-            list.Add(f4);
-            list.Add(f5);
-            list.Add(f6);
-            return list;
+               List<CommingTable> list = new List<CommingTable>();
+               list.Add(f1);
+               list.Add(f2);
+               list.Add(f3);
+               list.Add(f4);
+               list.Add(f5);
+               list.Add(f6);
+               return list;
+            /*   */
         }
 
 
@@ -784,43 +813,81 @@ namespace track.Controllers
 
         public List<GoOutTable> queryGoOutTable()
         {
-            GoOutTable f1 = new GoOutTable();
-            f1.featureName = "feature 1";
-            f1.goOutDate = "8, 6, 2015";
-            f1.week = 1;
-            f1.id = "001";
+            string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+            SqlConnection connection = new SqlConnection(coonString);
+            connection.Open();
+            // MessageBox.Show("Open database success!");
+            string queryStr = @" SELECT " +
+      @" CAST(CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int) as 'ID' , " +
+      @"　CWIV.[System_Title] as 'name'　"　+
+	   @", CWIV.[Microsoft_VSTS_Scheduling_FinishDate] as 'GoOutDate' " +
+	 @" ,DATEPART(WEEK, GETDATE()) - DATEPART(WEEK, dateadd(ms, -1, DATEADD(mm, DATEDIFF(m, 0, getdate()), 0))) + 1 as 'weekOfMonth' " +
+     @" ,DATEPART(WEEK, CWIV.[Microsoft_VSTS_Scheduling_FinishDate]) - DATEPART(WEEK, dateadd(ms, -1, DATEADD(mm, DATEDIFF(m, 0, getdate()), 0))) + 1 as 'weekOfClose' " +
+    @" FROM[Tfs_Warehouse].[dbo].[CurrentWorkItemView] as CWIV " +
+    @"  WHERE " +
+    @" CWIV.[System_WorkItemType] in ('Feature') " +
+    @" and CWIV.[System_State] in ('New', 'Active', 'Closed', 'Pending') " +
+   @" and CWIV.[AreaName] = 'OAS' " +
+    @" and CWIV.[Microsoft_VSTS_Scheduling_FinishDate] between dateadd(ms,-1, DATEADD(mm, DATEDIFF(m,0, getdate()), 0)) and dateadd(ms,-3, DATEADD(mm, DATEDIFF(m,0, getdate())+1, 0)) " +
+    @" ORDER BY CAST(CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int ) ";
 
-            GoOutTable f2 = new GoOutTable();
-            f2.featureName = "feature 2";
-            f2.goOutDate = "9, 16, 2015";
-            f2.week = 3;
-            f2.id = "002";
+            SqlCommand selectCMD = new SqlCommand(queryStr, connection);
 
-            GoOutTable f3 = new GoOutTable();
-            f3.featureName = "feature 3";
-            f3.goOutDate = "9, 26, 2015";
-            f3.week = 4;
-            f3.id = "003";
+            SqlDataAdapter custDA = new SqlDataAdapter();
+            custDA.SelectCommand = selectCMD;
 
-            GoOutTable f4 = new GoOutTable();
-            f4.featureName = "feature 4";
-            f4.goOutDate = "10, 6, 2015";
-            f4.week = 2;
-            f4.id = "004";
-
-            GoOutTable f5 = new GoOutTable();
-            f5.featureName = "feature 5";
-            f5.goOutDate = "11, 6, 2015";
-            f5.week = 2;
-            f5.id = "005";
-
+            DataSet custDS = new DataSet();
+            custDA.Fill(custDS);
             List<GoOutTable> list = new List<GoOutTable>();
-            list.Add(f1);
-            list.Add(f2);
-            list.Add(f3);
-            list.Add(f4);
-            list.Add(f5);
+            foreach (DataRow mDr in custDS.Tables[0].Rows)
+            {
+                GoOutTable go = new GoOutTable();
+                go.id = mDr["ID"].ToString();
+                go.featureName = mDr["name"].ToString();
+                go.goOutDate = mDr["GoOutDate"].ToString();
+                go.week = int.Parse(mDr["weekOfClose"].ToString());
+                go.weekOfMonth = mDr["weekOfMonth"].ToString();
+                list.Add(go);
+            }
             return list;
+            /*         GoOutTable f1 = new GoOutTable();
+                     f1.featureName = "feature 1";
+                     f1.goOutDate = "8, 6, 2015";
+                     f1.week = 1;
+                     f1.id = "001";
+
+                     GoOutTable f2 = new GoOutTable();
+                     f2.featureName = "feature 2";
+                     f2.goOutDate = "9, 16, 2015";
+                     f2.week = 3;
+                     f2.id = "002";
+
+                     GoOutTable f3 = new GoOutTable();
+                     f3.featureName = "feature 3";
+                     f3.goOutDate = "9, 26, 2015";
+                     f3.week = 4;
+                     f3.id = "003";
+
+                     GoOutTable f4 = new GoOutTable();
+                     f4.featureName = "feature 4";
+                     f4.goOutDate = "10, 6, 2015";
+                     f4.week = 2;
+                     f4.id = "004";
+
+                     GoOutTable f5 = new GoOutTable();
+                     f5.featureName = "feature 5";
+                     f5.goOutDate = "11, 6, 2015";
+                     f5.week = 2;
+                     f5.id = "005";
+
+                     List<GoOutTable> list = new List<GoOutTable>();
+                     list.Add(f1);
+                     list.Add(f2);
+                     list.Add(f3);
+                     list.Add(f4);
+                     list.Add(f5);
+                     return list;
+                     */
         }
 
         public ActionResult responseTFSRelease()
@@ -1272,6 +1339,12 @@ namespace track.Controllers
             get;
             set;
         }
+
+        public string weekOfMonth
+        {
+            get;
+            set;
+        }
     }
 
     public class TFSRelease
@@ -1349,6 +1422,35 @@ namespace track.Controllers
             set;
         }
         public List<personReleasePair> pair
+        {
+            get;
+            set;
+        }
+    }
+
+    public class StageWeeks
+    {
+        public string ID
+        {
+            get;
+            set;
+        }
+        public string name
+        {
+            get;
+            set;
+        }
+        public string newWeeks
+        {
+            get;
+            set;
+        }
+        public string activeWeeks
+        {
+            get;
+            set;
+        }
+        public string delayWeeks
         {
             get;
             set;

@@ -362,13 +362,13 @@ function drawWeeks2(data) {
     console.log("XXXXXX");
     console.log(data);
     var parseData = JSON.parse(data, function (key, value) {
-        if (key == "currentStageWeek") {
+        if (key == "newWeeks") {
             return parseInt(value);
         }
-        else if (key == "nextStageWeek") {
+        else if (key == "activeWeeks") {
             return parseInt(value);
         }
-        else if (key == "delayWeek") {
+        else if (key == "delayWeeks") {
             return parseInt(value);
         }
         else {
@@ -384,25 +384,25 @@ function drawWeeks2(data) {
     var dataWeeks = new Array();
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
     console.log(parseData[0]["featureName"]);
-    console.log(parseData[0]["currentStageWeek"]);
+    console.log(parseData[0]["newWeeks"]);
     console.log("@@@@@@@@@@@@@@@@@@@");
     for (i = 0; i < parseData.length; i++) {
         featureName[i] = parseData[i]["featureName"];
-        currentStageWeeks[i] = parseData[i]["currentStageWeek"];
-        nextStageWeeks[i] = parseData[i]["nextStageWeek"];
-        delayStageWeeks[i] = parseData[i]["delayWeek"];
+        currentStageWeeks[i] = parseData[i]["newWeeks"];
+        nextStageWeeks[i] = parseData[i]["activeWeeks"];
+        delayStageWeeks[i] = parseData[i]["delayWeeks"];
     }
     dataWeeks[2] = {
-        name: 'Current Stage Weeks',
+        name: 'New stages:',
         data: currentStageWeeks
     };
     dataWeeks[1] = {
-        name: 'Next Stage Weeks',
+        name: 'Active stage:',
         color: "#90ed7d",
         data: nextStageWeeks
     };
     dataWeeks[0] = {
-        name: 'Delay weeks',
+        name: 'Delay stage:',
         color: "#f15c80",
         data: delayStageWeeks
     };
@@ -457,7 +457,6 @@ function drawWeeks2(data) {
                 shadow: false
             },
             tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
                 pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
             },
             plotOptions: {
@@ -653,7 +652,7 @@ function drawWeeks4(data) {
         tooltip: {
             valueSuffix: ' weeks',
             formatter: function () {
-                return '<span style="font-size: 12px">' + this.x.name + '<br/>' + this.y + 'th week in this month' + '</span>';
+                return '<span style="font-size: 12px">' + this.x.name + '<br/>' + "will go out in the "+ this.y + 'th week of this month.' + '</span>';
             }
         },
         plotOptions: {
