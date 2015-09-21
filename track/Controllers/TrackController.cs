@@ -813,7 +813,7 @@ namespace track.Controllers
 
         public List<GoOutTable> queryGoOutTable()
         {
-            string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+           /*   string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
             // MessageBox.Show("Open database success!");
@@ -850,7 +850,7 @@ namespace track.Controllers
                 list.Add(go);
             }
             return list;
-            /*         GoOutTable f1 = new GoOutTable();
+            */       GoOutTable f1 = new GoOutTable();
                      f1.featureName = "feature 1";
                      f1.goOutDate = "8, 6, 2015";
                      f1.week = 1;
@@ -887,7 +887,7 @@ namespace track.Controllers
                      list.Add(f4);
                      list.Add(f5);
                      return list;
-                     */
+                     
         }
 
         public ActionResult responseTFSRelease()

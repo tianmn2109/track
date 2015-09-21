@@ -382,15 +382,22 @@ function drawWeeks2(data) {
     var nextStageWeeks = new Array();
     var delayStageWeeks = new Array();
     var dataWeeks = new Array();
+    var featureID = new Array();
+    var featureDis = new Array();
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
     console.log(parseData[0]["featureName"]);
     console.log(parseData[0]["newWeeks"]);
     console.log("@@@@@@@@@@@@@@@@@@@");
     for (i = 0; i < parseData.length; i++) {
-        featureName[i] = parseData[i]["featureName"];
+        featureName[i] = parseData[i]["name"];
         currentStageWeeks[i] = parseData[i]["newWeeks"];
         nextStageWeeks[i] = parseData[i]["activeWeeks"];
         delayStageWeeks[i] = parseData[i]["delayWeeks"];
+        featureID[i] = parseData[i]["ID"];
+        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        console.log(featureName[i]);
+        console.log("-------------------------------");
+        featureDis[i] = { "id": featureID[i], "name": featureName[i] };
     }
     dataWeeks[2] = {
         name: 'New stages:',
@@ -430,7 +437,12 @@ function drawWeeks2(data) {
                 text: 'Features Schedule status'
             },
             xAxis: {
-                categories: featureName,
+                categories: featureDis,
+                labels: {
+                    formatter: function () {
+                        return this.value.id;//这里设置x轴显示的内容,Y轴同理设置yAxis的这个属性
+                    }
+                }
             },
             yAxis: {
                 min: 0,
@@ -457,7 +469,10 @@ function drawWeeks2(data) {
                 shadow: false
             },
             tooltip: {
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+               // pointFormat: 'this.: {point.y} weeks<br/>Total: {point.stackTotal} weeks'
+                formatter: function () {
+                    return '<span style="font-size: 12px">' + this.x.name + '<br/>' + "will go out in the " + 'th week of this month.' + '</span>';
+                }
             },
             plotOptions: {
                 column: {
