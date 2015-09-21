@@ -609,12 +609,14 @@ function drawWeeks4(data) {
     var dataWeeks = new Array();
     var featureID = new Array();
     var featureX = new Array();
+    var featureGoOutDate = new Array();
    // featureID[0] = "";
     for (i = 0; i < parseData.length; i++) {
         featureName[i] = parseData[i]["featureName"];
         goout[i] = parseData[i]["week"];
         featureID[i] = parseData[i]["id"];
-        featureX[i] = { "id": featureID[i], "name": featureName[i] };
+        featureGoOutDate[i] = parseData[i]["goOutDate"];
+        featureX[i] = { "id": featureID[i], "name": featureName[i], "GoOutDate": featureGoOutDate[i] };
     }
     console.log(featureName);
     //console.log(comming);
@@ -667,7 +669,7 @@ function drawWeeks4(data) {
         tooltip: {
             valueSuffix: ' weeks',
             formatter: function () {
-                return '<span style="font-size: 12px">' + this.x.name + '<br/>' + "will go out in the "+ this.y + 'th week of this month.' + '</span>';
+                return '<span style="font-size: 12px">' + this.x.name + '<br/>' + "will go out in the "+ this.y + 'th week of this month. <br/> Go out date: ' + this.x.GoOutDate + '</span>';
             }
         },
         plotOptions: {
@@ -1250,22 +1252,23 @@ function createCalendar() {
         callback: function () {
             var ee = moment(this.start_date).format("ll"),
                 a = moment(this.end_date).format("ll");
-            console.log("Start Date: " + e + "\nEnd Date: " + a);
+ //          console.log("Start Date: " + e + "\nEnd Date: " + a);
             //var requestURL = 'http://localhost:32020/Track/refreshComming';
-
+/*
             var e = document.getElementById("dropbox");
             console.log("---------------");
             console.log(e);
             var strSelect = e.options[e.selectedIndex].text;
             console.log("---------------");
             console.log(strSelect);
+  */        strSelect = "Go Out";
             var requestURL = createXmlHttpRequest();
             if (strSelect == "Comming") {
                 requestURL = 'http://localhost:32020/Track/refreshComming';
                 //   requestURL.onreadystatechange = createCommingTable();
             }
             else if (strSelect == "Go Out") {
-                requestURL = 'http://localhost:32020/Track/refreshGoOut';
+                requestURL = 'http://localhost:32020/Track/responseGoOutTable';
                 // requestURL.onreadystatechange = createGoOutTable();
             }
             else {

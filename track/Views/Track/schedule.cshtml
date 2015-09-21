@@ -74,7 +74,7 @@
 </head>
 <body>
 
-    <div class="con" style="height:100%;">
+    <div class="con" style="width:80%;">
         <div class="header clearfix">
             <h1>Schedule</h1>
 
@@ -93,14 +93,9 @@
         </div><!-- End of Header -->
 
 
-        <div id="ttotal" style="width:80% ; height=500px;">
-            <div class="daterange daterange--double">
-                <script src="../../Scripts/Calendar.js"></script>
-            </div>
-           <br/>
-        </div>
+        
 
-        <div id="total" style="width:80%;">
+        <div id="total" style="width:100%;">
 
                 <div id="right" style="width: 48%;margin:0; float : left">
                     <div id="container9" style=" text-align : left;">
@@ -110,15 +105,26 @@
                     </div>
 
                 </div>
-                <div id="visiableTable" style="width: 48%; text-align : left; float:left">
-                    
-                        <div id="table" class="table" style="width:80%; text-align:left;">
-                        </div>
+                
+        </div>
+
+        <div id="ttotal" style="width:100% ;">
+            
+            <div class="daterange daterange--double">
+                <label style="text-align: left"> Selecet go out feature from time range</label>
+                <script src="../../Scripts/Calendar.js"></script>
+            </div>
+            <br />
+            <div id="visiableTable" style="width: 48%; text-align : left; float:right">
+
+                <div id="table" class="table" style="width:80%; text-align:left;">
                 </div>
+            </div>
         </div>
 
    </div><!-- End of Container -->
-    <script type="text/javascript"> createCalendar();getWeeks2();getGoOutWeek();</script>
+function createGoOutTable() {
+    <script type="text/javascript"> createCalendar(); getWeeks2(); getGoOutWeek();</script>
 
 
     <div class="footer">

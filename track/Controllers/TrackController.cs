@@ -615,7 +615,9 @@ namespace track.Controllers
                  list.Add(f2);
                  list.Add(f3);
                return list;*/
+
             
+
             StageWeeks f1 = new StageWeeks();
             f1.ID = "001";
             f1.name = "feature 1";
@@ -804,33 +806,53 @@ namespace track.Controllers
         }
 
 
-        public ActionResult responseGoOutTable()
+        public ActionResult responseGoOutTable(object sender, EventArgs e)
         {
-            List<GoOutTable> list = queryGoOutTable();
+            string startDate = "";
+            int s = 0;
+            string endDate = "";
+            if (Request.QueryString["startDate"] == null) {
+                startDate = DateTime.Now.AddDays(-DateTime.Now.Day + 1).ToString();
+                endDate = DateTime.Now.AddMonths(1).AddDays(-DateTime.Now.AddMonths(1).Day).ToString();
+                s = 0;
+
+            }
+            else { 
+                  startDate = Request["startDate"].ToString();
+                  endDate = Request["endDate"].ToString();
+                s = 1;
+            }
+            List<GoOutTable> list = queryGoOutTable(startDate, endDate, s);
             string res = new JavaScriptSerializer().Serialize(list);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
-        public List<GoOutTable> queryGoOutTable()
+        public List<GoOutTable> queryGoOutTable(string startDate, string endDate, int s)
         {
-           /*   string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+            
+            string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
             // MessageBox.Show("Open database success!");
             string queryStr = @" SELECT " +
       @" CAST(CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int) as 'ID' , " +
-      @"　CWIV.[System_Title] as 'name'　"　+
-	   @", CWIV.[Microsoft_VSTS_Scheduling_FinishDate] as 'GoOutDate' " +
-	 @" ,DATEPART(WEEK, GETDATE()) - DATEPART(WEEK, dateadd(ms, -1, DATEADD(mm, DATEDIFF(m, 0, getdate()), 0))) + 1 as 'weekOfMonth' " +
+      @"　CWIV.[System_Title] as 'name'　" +
+       @", CWIV.[Microsoft_VSTS_Scheduling_FinishDate] as 'GoOutDate' " +
+     @" ,DATEPART(WEEK, GETDATE()) - DATEPART(WEEK, dateadd(ms, -1, DATEADD(mm, DATEDIFF(m, 0, getdate()), 0))) + 1 as 'weekOfMonth' " +
      @" ,DATEPART(WEEK, CWIV.[Microsoft_VSTS_Scheduling_FinishDate]) - DATEPART(WEEK, dateadd(ms, -1, DATEADD(mm, DATEDIFF(m, 0, getdate()), 0))) + 1 as 'weekOfClose' " +
     @" FROM[Tfs_Warehouse].[dbo].[CurrentWorkItemView] as CWIV " +
     @"  WHERE " +
     @" CWIV.[System_WorkItemType] in ('Feature') " +
     @" and CWIV.[System_State] in ('New', 'Active', 'Closed', 'Pending') " +
-   @" and CWIV.[AreaName] = 'OAS' " +
-    @" and CWIV.[Microsoft_VSTS_Scheduling_FinishDate] between dateadd(ms,-1, DATEADD(mm, DATEDIFF(m,0, getdate()), 0)) and dateadd(ms,-3, DATEADD(mm, DATEDIFF(m,0, getdate())+1, 0)) " +
-    @" ORDER BY CAST(CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int ) ";
-
+   @" and CWIV.[AreaName] = 'OAS' ";
+            if (s == 0) {
+                //    @" and CWIV.[Microsoft_VSTS_Scheduling_FinishDate] between dateadd(ms,-1, DATEADD(mm, DATEDIFF(m,0, getdate()), 0)) and dateadd(ms,-3, DATEADD(mm, DATEDIFF(m,0, getdate())+1, 0)) " +
+                queryStr += @" and CWIV.[Microsoft_VSTS_Scheduling_FinishDate] between convert(datetime, '" + startDate + "', 101)" + " and convert(datetime, '" + endDate + "', 101)";
+    }
+            else {
+                queryStr += @" and CWIV.[Microsoft_VSTS_Scheduling_FinishDate] between convert(datetime, '" + startDate + "', 107)" + " and convert(datetime, '" + endDate + "', 107)";
+            }
+            queryStr += @" ORDER BY CAST(CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int ) ";
             SqlCommand selectCMD = new SqlCommand(queryStr, connection);
 
             SqlDataAdapter custDA = new SqlDataAdapter();
@@ -850,7 +872,7 @@ namespace track.Controllers
                 list.Add(go);
             }
             return list;
-            */       GoOutTable f1 = new GoOutTable();
+           /*        GoOutTable f1 = new GoOutTable();
                      f1.featureName = "feature 1";
                      f1.goOutDate = "8, 6, 2015";
                      f1.week = 1;
@@ -887,7 +909,7 @@ namespace track.Controllers
                      list.Add(f4);
                      list.Add(f5);
                      return list;
-                     
+               */       
         }
 
         public ActionResult responseTFSRelease()
