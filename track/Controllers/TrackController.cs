@@ -87,6 +87,7 @@ namespace track.Controllers
         }
         public List<FeatureStatus> refresh()
         {
+
             string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
@@ -255,12 +256,13 @@ namespace track.Controllers
             System.Console.WriteLine("3");
             connection.Close();
             return list;
-            //     MessageBox.Show("Close database success !");
-            //return View();
+
+            
+            return list;
         }
 
         public List<Feature> getStatus(string stageSelected)
-        {
+        {/*
             string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
@@ -396,13 +398,7 @@ namespace track.Controllers
                     
                     if (int.Parse(mDr["R_Wk"].ToString()) < 0)
                     {
-                 /*       if (mDr["F_Wk"].ToString() == "")
-                        {
-                            feature.status = "Prod";
-                            feature.weeks = mDr["R_Wk"].ToString();
-                            feature.delay = true;
-                        }
-                   */ }
+              }
                     else
                     {
                         feature.delay = false;
@@ -416,13 +412,7 @@ namespace track.Controllers
                     
                     if (int.Parse(mDr["D_Wk"].ToString()) < 0)
                     {
-                     /*   if (mDr["R_Wk"].ToString() == "")
-                        {
-                            feature.status = "Dogfood";
-                            feature.weeks = mDr["D_Wk"].ToString();
-                            feature.delay = true;
-                        }
-                   */ }
+                   }
                     else
                     {
                         feature.delay = false;
@@ -494,6 +484,34 @@ namespace track.Controllers
             return list;
             //     MessageBox.Show("Close database success !");
             //return View();
+
+            */
+            List<Feature> list = new List<Feature>();
+            for (int i = 0; i < 100; i++)
+            {
+                Feature f1 = new Feature();
+                f1.activeToDoogfoodWeeks = "2";
+
+                string d = DateTime.Now.ToString();
+                f1.date = new List<string>();
+                f1.date.Add(d);
+                f1.date.Add(d);
+                f1.date.Add(d);
+                f1.date.Add(d);
+                f1.date.Add(d);
+                f1.date.Add(d);
+                f1.delay = true;
+                f1.description = "dfgfdgd";
+                f1.name = "test";
+                f1.delayWeeks = "2";
+                f1.dogfoodToProdWeeks = "3";
+                f1.exitreviewToDoneWeeks = "5";
+                f1.prodToExitreviewWeeks = "4";
+                f1.newToActiveWeeks = "2";
+                f1.weeks = "4";
+                list.Add(f1);
+            }
+            return list;
         }
         public string gjson()
         {

@@ -1,5 +1,5 @@
 ﻿function getFeatureStage() {
-
+    
     var e = document.getElementById("stageBox");
     console.log("---------------");
     console.log(e);
@@ -13,7 +13,7 @@
    requestURL = addURLParam(requestURL, "stage", strSelect);
     console.log(requestURL);
     var xmlhttp = new XMLHttpRequest();
-    
+
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
@@ -24,7 +24,8 @@
             console.log("sssssssssssssssssssssssssssssss");
             console.log(sss);
             data = sss;
-
+           
+            setTimeout("tiem", 4000);
             var d = JSON.parse(data, function (key, value) {
                 //  console.log("key = %s", key);
                 //  console.log(" value = %s\n", value);
@@ -234,7 +235,16 @@
                 feature += "</pre>";
                 features += feature;
             }
+        path1 = "../../Scripts/arrowsandboxes.js";
+            path2 = "../../Scripts/jquery.wz_jsgraphics.js";
+
+            includeLinkStyle(path1);
+            includeLinkStyle(path2);
+        /*        */
+         //   setTimeout("timeout", 10000);
+
             console.log("$$$$$$$$$$$$$$$$$$$$$$$22");
+
             console.log(document.getElementById("features").innerHTML);
             //    document.getElementById("features").innerHTML = "";
             console.log("$$$$$$$$$$$$$$$$$$$$$$$2");
@@ -246,10 +256,7 @@
             console.log(features);
             //   url = "../../Content/arrowsandboxes.css";
             //  includeLinkStyle(url);
-            path1 = "../../Scripts/arrowsandboxes.js";
-            path2 = "../../Scripts/jquery.wz_jsgraphics.js";
-            includeLinkStyle(path1);
-            includeLinkStyle(path2);
+           
             $("#features").append(features);//.arrows_and_boxes();;//.arrows_and_boxes()
 
             //  console.log(document.getElementById("features").innerHTML);
@@ -521,5 +528,6 @@ function includeLinkStyle(path) {
     var script = document.createElement('script');
     script.src = path;
     script.type = 'text/javascript';
+    script.async = "async";
     head.appendChild(script);
 }
