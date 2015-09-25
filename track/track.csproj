@@ -215,6 +215,7 @@
     <Content Include="Views\Track\refresh.cshtml" />
     <Content Include="Scripts\jquery.wz_jsgraphics.js" />
     <Content Include="Views\Track\back_schedule.cshtml" />
+    <Content Include="Views\Track\back_resource.cshtml" />
     <None Include="Views\Track\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

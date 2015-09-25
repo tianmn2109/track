@@ -1,4 +1,5 @@
-﻿function getFeatureStage() {
+﻿var valChange = false;
+function getFeatureStage() {
     
     var e = document.getElementById("stageBox");
     console.log("---------------");
@@ -17,6 +18,13 @@
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
+            document.getElementById("features").style.visibility = "hidden";//显示
+            path1 = "../../Scripts/arrowsandboxes.js";
+            path2 = "../../Scripts/jquery.wz_jsgraphics.js";
+
+            includeLinkStyle(path1);
+            includeLinkStyle(path2);
+
             data = xmlhttp.responseText;
             console.log("hello for feature2");
             console.log(data);
@@ -25,7 +33,7 @@
             console.log(sss);
             data = sss;
            
-            setTimeout("tiem", 4000);
+            setTimeout("tiem", 3000);
             var d = JSON.parse(data, function (key, value) {
                 //  console.log("key = %s", key);
                 //  console.log(" value = %s\n", value);
@@ -44,6 +52,24 @@
                 feature += "<pre class=\"arrows-and-boxes\" >";
                 var delay = d[i]["delay"];
                 var curStatus = true;
+                if (d[i]["weeks"] != "") {
+                    d[i]["weeks"] += "w";
+                }
+                if (d[i]["newToActiveWeeks"] != "") {
+                    d[i]["newToActiveWeeks"] += "w";
+                }
+                if (d[i]["activeToDoogfoodWeeks"] != "") {
+                    d[i]["activeToDoogfoodWeeks"] += "w";
+                }
+                if (d[i]["dogfoodToProdWeeks"] != "") {
+                    d[i]["dogfoodToProdWeeks"] += "w";
+                }
+                if (d[i]["prodToExitreviewWeeks"] != "") {
+                    d[i]["prodToExitreviewWeeks"] += "w";
+                }
+                if (d[i]["exitreviewToDoneWeeks"] != "") {
+                    d[i]["exitreviewToDoneWeeks"] += "w";
+                }
                 // dedtermine the color of node 'new'
                 if (d[i]["status"] == "New" && delay == true) {
                     feature += "(((New " + " | {{ " + d[i]["date"][0] + " }}　)))";
@@ -66,14 +92,14 @@
                     // feature += " " + d[i]["weeks"] + " ";
                 }
                 if (d[i]["status"] == "New") {
-                    feature += " {{ " + d[i]["weeks"] + " }} ";
+                    feature += " {{ " + d[i]["weeks"] + "  }} ";
                 }
 
                 if (d[i]["status"] == "New")
                     curStatus = false;
 
                 if (curStatus == true) {
-                    feature += " {{ " + d[i]["newToActiveWeeks"] + " }} ";
+                    feature += " {{ " + d[i]["newToActiveWeeks"] + "  }} ";
                 }
                 // dedtermine the color of node 'Active'
                 if (d[i]["status"] == "Active" && delay == true) {
@@ -100,7 +126,7 @@
                     // feature += " " + d[i]["weeks"] + " ";
                 }
                 if (d[i]["status"] == "Active") {
-                    feature += " {{ " + d[i]["weeks"] + " }} ";
+                    feature += " {{ " + d[i]["weeks"] + "  }} ";
                 }
 
                 if (d[i]["status"] == "Active") {
@@ -109,7 +135,7 @@
                 }
 
                 if (curStatus == true) {
-                    feature += " {{ " + d[i]["activeToDoogfoodWeeks"] + " }} ";
+                    feature += " {{ " + d[i]["activeToDoogfoodWeeks"] + "  }} ";
                 }
 
                 // dedtermine the color of node 'dogfood'
@@ -141,13 +167,13 @@
                     //    feature += " " + d[i]["weeks"] + " ";
                 }
                 if (d[i]["status"] == "Dogfood") {
-                    feature += " {{ " + d[i]["weeks"] + " }} ";
+                    feature += " {{ " + d[i]["weeks"] + "  }} ";
                 }
                 if (d[i]["status"] == "Dogfood")
                     curStatus = false;
 
                 if (curStatus == true) {
-                    feature += " {{ " + d[i]["dogfoodToProdWeeks"] + " }} ";
+                    feature += " {{ " + d[i]["dogfoodToProdWeeks"] + "  }} ";
                 }
 
                 // dedtermine the color of node 'prod'
@@ -175,14 +201,14 @@
                     //      feature += " " + d[i]["weeks"] + " ";
                 }
                 if (d[i]["status"] == "Prod") {
-                    feature += " {{ " + d[i]["weeks"] + " }} ";
+                    feature += " {{ " + d[i]["weeks"] + "  }} ";
                 }
 
                 if (d[i]["status"] == "Prod")
                     curStatus = false;
 
                 if (curStatus == true) {
-                    feature += " {{ " + d[i]["prodToExitreviewWeeks"] + " }} ";
+                    feature += " {{ " + d[i]["prodToExitreviewWeeks"] + "  }} ";
                 }
 
                 // dedtermine the color of node 'exit review'
@@ -211,14 +237,14 @@
                     //      feature += " " + d[i]["weeks"] + " ";
                 }
                 if (d[i]["status"] == "Exit review") {
-                    feature += " {{ " + d[i]["weeks"] + " }} ";
+                    feature += " {{ " + d[i]["weeks"] + "  }} ";
                 }
 
                 if (d[i]["status"] == "Exit review")
                     curStatus = false;
 
                 if (curStatus == true) {
-                    feature += " {{ " + d[i]["exitreviewToDoneWeeks"] + " }} ";
+                    feature += " {{ " + d[i]["exitreviewToDoneWeeks"] + "  }} ";
                 }
 
                 // dedtermine the color of node 'done'
@@ -235,14 +261,17 @@
                 feature += "</pre>";
                 features += feature;
             }
-        path1 = "../../Scripts/arrowsandboxes.js";
-            path2 = "../../Scripts/jquery.wz_jsgraphics.js";
-
-            includeLinkStyle(path1);
-            includeLinkStyle(path2);
-        /*        */
-         //   setTimeout("timeout", 10000);
-
+            
+            /*        */
+            console.log("loop");
+            setTimeout("changeValue()", 2000);
+          //  while (valChange == false) {
+          //  }
+            //  valChange = false;
+       //     sleep(2000);
+       //     for (var i = 0; i < 10000; i++) {
+         //       for (var j = 0; j < 10000; j++) { }
+           // }
             console.log("$$$$$$$$$$$$$$$$$$$$$$$22");
 
             console.log(document.getElementById("features").innerHTML);
@@ -281,6 +310,21 @@
         }
  })*/ 
 
+}
+
+function sleep(numberMillis) {
+    var now = new Date();
+    var exitTime = now.getTime() + numberMillis;
+    while (true) {
+        now = new Date();
+        if (now.getTime() > exitTime)
+            return;
+    }
+}
+/**/
+function changeValue()
+{
+    document.getElementById("features").style.visibility = "visible";//显示
 }
 
 function handleFeature()

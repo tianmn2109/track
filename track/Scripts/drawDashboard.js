@@ -409,7 +409,7 @@ function drawWeeks2(data) {
         data: nextStageWeeks
     };
     dataWeeks[0] = {
-        name: 'Delay stage:',
+        name: 'Exit review stage:',
         color: "#f15c80",
         data: delayStageWeeks
     };
@@ -431,7 +431,8 @@ function drawWeeks2(data) {
     //$(function () {
     $('#container2').highcharts({
             chart: {
-                type: 'column'
+                type: 'column',
+                inverted: true
             },
             title: {
                 text: 'Features Schedule status'
@@ -471,7 +472,7 @@ function drawWeeks2(data) {
             tooltip: {
                // pointFormat: 'this.: {point.y} weeks<br/>Total: {point.stackTotal} weeks'
                 formatter: function () {
-                    return '<span style="font-size: 12px">' + this.x.name + '<br/>' + "will go out in the " + 'th week of this month.' + '</span>';
+                    return '<span style="font-size: 12px">' + this.x.name + '<br/>' + "weeks spend in three stages" + '</span>';
                 }
             },
             plotOptions: {
@@ -610,14 +611,17 @@ function drawWeeks4(data) {
     var featureID = new Array();
     var featureX = new Array();
     var featureGoOutDate = new Array();
-   // featureID[0] = "";
+    // featureID[0] = "";
+    var currentWeek;
     for (i = 0; i < parseData.length; i++) {
         featureName[i] = parseData[i]["featureName"];
         goout[i] = parseData[i]["week"];
         featureID[i] = parseData[i]["id"];
         featureGoOutDate[i] = parseData[i]["goOutDate"];
         featureX[i] = { "id": featureID[i], "name": featureName[i], "GoOutDate": featureGoOutDate[i] };
+        currentWeek = parseData[i]["weekOfMonth"];
     }
+    
     console.log(featureName);
     //console.log(comming);
     dataWeeks[0] = {
@@ -631,10 +635,10 @@ function drawWeeks4(data) {
             type: 'bar'
         },
         title: {
-            text: 'Features will go out'
+            text: 'Features will go out in this month'
         },
         subtitle: {
-            text: ''
+            text: 'current week is the ' + currentWeek + 'th week of this month'
         },
         xAxis: {
             categories: featureX,
@@ -1246,9 +1250,8 @@ function createCalendar() {
     new Calendar({
         element: $(".daterange--double"),
         earliest_date: new Date("January 1, 2000"),
-        latest_date: new Date, start_date:
-            new Date("May 1, 2015"),
-        end_date: new Date("May 31, 2015"),
+        latest_date: new Date, start_date:new Date("May 1, 2015"),
+        end_date: new Date("May 30, 2015"),
         callback: function () {
             var ee = moment(this.start_date).format("ll"),
                 a = moment(this.end_date).format("ll");
@@ -1278,15 +1281,25 @@ function createCalendar() {
             console.log(requestURL);
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("get", requestURL, false);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                 //   data = xmlhttp.responseText;
+                    sss = JSON.parse(xmlhttp.responseText);
+                    data = sss;
+                    goOutTable(data);
+                }
+            }
             xmlhttp.send();
-            if (strSelect == "Comming") {
-                createCommingTable();
-            }
-            else if (strSelect == "Go Out") {
-                createGoOutTable();
-            }
-            else {
-            }
+         /*   
+                if (strSelect == "Comming") {
+                    createCommingTable();
+                }
+                else if (strSelect == "Go Out") {
+                    createGoOutTable();
+                }
+                else {
+                }
+                */
             //     createTable();
         }
     });
@@ -1374,7 +1387,9 @@ function createGoOutTable() {
 
             //      drawWeeks(data);
             console.log(data);
-            goOutTable(data);
+     //       if (this.status == 200) {
+                goOutTable(data);
+       //     }
         }
     })
 }

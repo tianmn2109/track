@@ -105,8 +105,25 @@
         </div>
         <div id="container4" style="width:80%; text-align : center;margin:0 auto">
         </div>
+
+        <div id="left" style="width:40%; text-align : left;margin:0 auto;float: left">
+            <div id="container6">
+            </div>
+            <select id="quarter" onchange="" style=" margin-left: 20px;height:35px; text-align:center;">
+                <option value="1">All</option>
+                <option value="2">Quarter 1</option>
+                <option value="3">Quarter 2</option>
+                <option value="4">Quarter 3</option>
+                <option value="5">Quarter 4</option>
+            </select>
+            <div id="tableTFS" class="table">
+            </div>
+        </div>
+
+        <div id="tablePerson" class="table" style="width:40%; float:left ">
+        </div>
     </div><!-- End of Container -->
-    <script type="text/javascript"> getPercents(); getFC();/**/</script>
+    <script type="text/javascript"> getNeedResources(); getTFSRelease(); getPersonFeatures(); getPercents(); getFC();/**/</script>
   
 
         <div class="footer">

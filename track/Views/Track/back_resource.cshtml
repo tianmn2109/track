@@ -74,9 +74,9 @@
 </head>
 <body>
 
-    <div class="con" style="width:100%;">
+    <div class="con" style="height:100%;">
         <div class="header clearfix">
-            <h1>Schedule</h1>
+            <h1>Resource</h1>
 
             <div class="nav">
 
@@ -93,40 +93,33 @@
         </div><!-- End of Header -->
 
 
-        <div id="dd">
+        <div id="total" style="width:90%; text-align : left;margin:0 auto;">
 
-            <div id="total" style="width:100%;">
-
-                <div id="right" style="width: 48%;margin:0; float : left">
-                    <div id="container9" style=" text-align : left;">
-                    </div>
-
-                    <div id="container2" style=" height:7000px;">
-                    </div>
-
+            <div id="left" style="width:40%; text-align : left;margin:0 auto;float: left">
+                <div id="container6">
                 </div>
-
+                <select id="quarter" onchange="" style=" margin-left: 20px;height:35px; text-align:center;">
+                    <option value="1">All</option>
+                    <option value="2">Quarter 1</option>
+                    <option value="3">Quarter 2</option>
+                    <option value="4">Quarter 3</option>
+                    <option value="5">Quarter 4</option>
+                </select>
+                <div id="tableTFS" class="table">
+                </div>
             </div>
+            <div id="right" style="width:40%; text-align : left;margin:0 auto;float:right">
 
-            <div id="ttotal" style="width:100% ;">
-
-                <div class="daterange daterange--double">
-                    <label style="text-align: left"> Selecet go out feature from time range</label>
-                    <script src="../../Scripts/Calendar.js"></script>
+                <div id="tablePerson" class="table">
                 </div>
-                <br />
-                <div id="visiableTable" style="width: 48%; text-align : left; float:right">
 
-                    <div id="table" class="table" style="width:80%; text-align:left;">
-                    </div>
+                <div id="tableFeature" class="table">
                 </div>
             </div>
         </div>
 
-
     </div><!-- End of Container -->
-
-    <script type="text/javascript"> createCalendar(); getWeeks2(); getGoOutWeek(); ;</script>
+    <script type="text/javascript"> getNeedResources(); getTFSRelease(); getPersonFeatures(); getProjFeatures();/**/</script>
 
 
     <div class="footer">

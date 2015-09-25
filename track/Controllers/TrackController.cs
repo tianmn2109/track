@@ -262,7 +262,7 @@ namespace track.Controllers
         }
 
         public List<Feature> getStatus(string stageSelected)
-        {/*
+        {/**/
             string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
@@ -485,8 +485,8 @@ namespace track.Controllers
             //     MessageBox.Show("Close database success !");
             //return View();
 
-            */
-            List<Feature> list = new List<Feature>();
+           /* */
+       /*     List<Feature> list = new List<Feature>();
             for (int i = 0; i < 100; i++)
             {
                 Feature f1 = new Feature();
@@ -511,7 +511,7 @@ namespace track.Controllers
                 f1.weeks = "4";
                 list.Add(f1);
             }
-            return list;
+            return list;  */
         }
         public string gjson()
         {
@@ -633,10 +633,71 @@ namespace track.Controllers
                  list.Add(f2);
                  list.Add(f3);
                return list;*/
+         string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+            SqlConnection connection = new SqlConnection(coonString);
+            connection.Open();
+            // MessageBox.Show("Open database success!");
+            string queryStr = @" SELECT " +
+                               @" CWIV.[TfsMigrationTool_ReflectedWorkItemId] as 'ID', " +
+                               @" CWIV.[System_Title] as 'name' " +
+                                @" , CWIV.[Microsoft_VSTS_Scheduling_FinishDate] as 'GoOutDate' " +
+                                @" ,DATEDIFF(WEEK, GETDATE(), CWIV.[Microsoft_VSTS_Common_ActivatedDate]) as 'ADis' " +
+                                @" ,DATEDIFF(WEEK, GETDATE(), CWIV.[System_CreatedDate]) as 'NDis' " +
+                                @" ,DATEDIFF(WEEK, GETDATE(), CWIV.[Microsoft_VSTS_Scheduling_FinishDate]) as 'DDis' " +
+                                @" ,DATEDIFF(WEEK, CWIV.[System_CreatedDate], CWIV.[Microsoft_VSTS_Common_ActivatedDate]) as 'NtoA_Wk' " +
+                                @" ,DATEDIFF(WEEK, CWIV.[Microsoft_VSTS_Common_ActivatedDate], CWIV.[Microsoft_VSTS_Scheduling_FinishDate]) as 'AtoD_Wk' " +
 
+                                @" FROM[Tfs_Warehouse].[dbo].[CurrentWorkItemView] as CWIV " +
+
+                                @" WHERE " +
+
+                                @"  CWIV.[System_WorkItemType] in ('Feature') " +
+                                @" and CWIV.[System_State] in ('New', 'Active', 'Closed', 'Approved') " +
+                                @" and CWIV.[AreaName] = 'OAS' " +
+                                @" ORDER BY CAST( CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int ) ";
+
+            SqlCommand selectCMD = new SqlCommand(queryStr, connection);
+
+            SqlDataAdapter custDA = new SqlDataAdapter();
+            custDA.SelectCommand = selectCMD;
+            System.Console.WriteLine("1");
+            DataSet custDS = new DataSet();
+            custDA.Fill(custDS);
+            List<StageWeeks> list = new List<StageWeeks>();
+            foreach (DataRow mDr in custDS.Tables[0].Rows)
+            {
+                StageWeeks f = new StageWeeks();
+                f.name = mDr["name"].ToString();
+                f.ID = mDr["ID"].ToString();
+                f.newWeeks = "0";
+                f.activeWeeks = "0";
+                f.delayWeeks = "0";
+                if (mDr["DDis"].ToString() != "" && int.Parse(mDr["DDis"].ToString()) < 0)
+                {
+                    f.delayWeeks = (-int.Parse(mDr["DDis"].ToString())).ToString();
+                    f.activeWeeks = mDr["AtoD_Wk"].ToString();
+                    f.newWeeks = mDr["NtoA_Wk"].ToString();
+                }
+                else if (mDr["NDis"].ToString() != "" && int.Parse(mDr["NDis"].ToString()) < 0)
+                {
+                    f.delayWeeks = "0";
+                    f.activeWeeks = (-int.Parse(mDr["NDis"].ToString())).ToString();
+                    f.newWeeks = mDr["NtoA_Wk"].ToString();
+                }
+                else if (mDr["ADis"].ToString() != "" && int.Parse(mDr["ADis"].ToString()) < 0) {
+                    f.delayWeeks = "0";
+                    f.activeWeeks = "0";
+                    f.newWeeks = (-int.Parse(mDr["NDis"].ToString())).ToString();
+                }
+                list.Add(f);
+                
+            }
             
+            connection.Close();
+            return list;
+           
 
-            StageWeeks f1 = new StageWeeks();
+  /*        StageWeeks f1 = new StageWeeks();
             f1.ID = "001";
             f1.name = "feature 1";
             f1.newWeeks = "4";
@@ -662,6 +723,7 @@ namespace track.Controllers
             list.Add(f2);
             list.Add(f3);
             return list;
+              */
         }
         public ActionResult responseFeatureWeeks()
         {
@@ -1073,6 +1135,51 @@ namespace track.Controllers
 
         public List<featureAttr> queryFeatureAttr()
         {
+            string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+            SqlConnection connection = new SqlConnection(coonString);
+            connection.Open();
+            // MessageBox.Show("Open database success!");
+            string queryStr = @" SELECT " +
+                               @" CAST(CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int) as 'ID' " +
+                            @" ,CWIV.[System_Title] as 'Name' " +
+
+
+                            @"  ,CWIV.[Microsoft_VSTS_Planning_People] as 'People' " +
+
+                            @"  ,CWIV.[Microsoft_VSTS_Scheduling_FinishDate] as 'Release Date' " +
+
+                            @"  FROM[Tfs_Warehouse].[dbo].[CurrentWorkItemView] as CWIV " +
+
+                            @" WHERE " +
+
+                            @"  CWIV.[System_WorkItemType] in ('Feature') " +
+                            @" and CWIV.[ProjectPath] = '\Office\Office Online' " +
+                            @" and CWIV.[System_WorkItemType] in ('Feature') " +
+                            @" and CWIV.System_State in ('Active', 'New', 'Closed') " +
+                            @" and CWIV.[AreaName] = 'OAS' " +
+
+                            @" ORDER BY CAST( CWIV.[TfsMigrationTool_ReflectedWorkItemId] as int ) ";
+            SqlCommand selectCMD = new SqlCommand(queryStr, connection);
+
+            SqlDataAdapter custDA = new SqlDataAdapter();
+            custDA.SelectCommand = selectCMD;
+
+            DataSet custDS = new DataSet();
+            custDA.Fill(custDS);
+            List<featureAttr> list = new List<featureAttr>();
+            foreach (DataRow mDr in custDS.Tables[0].Rows)
+            {
+                featureAttr f1 = new featureAttr();
+                f1.featureName = mDr["Name"].ToString();
+                f1.pair = new List<personReleasePair>();
+                personReleasePair t1 = new personReleasePair();
+                t1.personName = mDr["People"].ToString();
+                t1.releaseDate = mDr["Release Date"].ToString();
+                f1.pair.Add(t1);
+                list.Add(f1);
+            }
+            return list;
+            /*
             featureAttr f1 = new featureAttr();
             f1.featureName = "feature 1";
             f1.pair = new List<personReleasePair>();
@@ -1126,6 +1233,7 @@ namespace track.Controllers
             list.Add(f2);
             list.Add(f3);
             return list;
+            */
         }
     }
 
