@@ -190,7 +190,9 @@
     <Content Include="Scripts\arrowsandboxes.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\sfd.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
+    <None Include="Properties\PublishProfiles\tttt.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Calendar.js" />
     <Content Include="Scripts\drawDashboard.js" />

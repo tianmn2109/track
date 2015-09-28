@@ -263,7 +263,7 @@ namespace track.Controllers
         //返回各个feature的状态数据
         public List<Feature> getStatus(string stageSelected)
         {
-            string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+      /*      string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
             // MessageBox.Show("Open database success!");
@@ -485,8 +485,8 @@ namespace track.Controllers
             //     MessageBox.Show("Close database success !");
             //return View();
 
-           /* */
-     /*      List<Feature> list = new List<Feature>();
+     */      /* */
+          List<Feature> list = new List<Feature>();
             for (int i = 0; i < 100; i++)
             {
                 Feature f1 = new Feature();
@@ -511,7 +511,7 @@ namespace track.Controllers
                 f1.weeks = "4";
                 list.Add(f1);
             }
-            return list;   */
+            return list;   
         }
         public string gjson()
         {
@@ -633,7 +633,7 @@ namespace track.Controllers
                  list.Add(f2);
                  list.Add(f3);
                return list;*/
-         string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+     /*    string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
             // MessageBox.Show("Open database success!");
@@ -695,7 +695,7 @@ namespace track.Controllers
             
             connection.Close();
             return list;
-      /*     
+     */      
 
         StageWeeks f1 = new StageWeeks();
             f1.ID = "001";
@@ -723,7 +723,7 @@ namespace track.Controllers
             list.Add(f2);
             list.Add(f3);
             return list;
-       */       
+             
         }
         //返回每个feature在new active 和exit review 三个阶段的时间
         public ActionResult responseFeatureWeeks()
@@ -913,7 +913,7 @@ namespace track.Controllers
         public List<GoOutTable> queryGoOutTable(string startDate, string endDate, int s)
         {
             
-            string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+      /*      string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
             // MessageBox.Show("Open database success!");
@@ -955,7 +955,7 @@ namespace track.Controllers
                 list.Add(go);
             }
             return list;
-      /*            GoOutTable f1 = new GoOutTable();
+    */              GoOutTable f1 = new GoOutTable();
                      f1.featureName = "feature 1";
                      f1.goOutDate = "8, 6, 2015";
                      f1.week = 1;
@@ -992,7 +992,7 @@ namespace track.Controllers
                      list.Add(f4);
                      list.Add(f5);
                      return list;
-         */             
+                      
         }
         //模拟数据，返回tfs的版本号及对应的时间
         public ActionResult responseTFSRelease()
@@ -1138,7 +1138,7 @@ namespace track.Controllers
 
         public List<featureAttr> queryFeatureAttr()
         {
-           string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+      /*     string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
             // MessageBox.Show("Open database success!");
@@ -1182,8 +1182,8 @@ namespace track.Controllers
                 list.Add(f1);
             }
             return list;
-            
-         /*   featureAttr f1 = new featureAttr();
+      */      
+            featureAttr f1 = new featureAttr();
             f1.featureName = "feature 1";
             f1.pair = new List<personReleasePair>();
             personReleasePair t1 = new personReleasePair();
@@ -1236,7 +1236,7 @@ namespace track.Controllers
             list.Add(f2);
             list.Add(f3);
             return list;
-       */     
+           
         }
     }
 

@@ -51,21 +51,27 @@
             text-align: center;
         }
     </style>
-    <link rel="stylesheet" href="../../Content/navigataur.css" />
+
 
     <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
     <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js" type="text/javascript"></script>
-    <script src="../../Scripts/features.js" type="text/javascript"></script>
 
-    <script src="../../Scripts/moment.js"></script>
-    <script src="../../Scripts/drawDashboard.js" type="text/javascript"></script>
 
-    <link rel="stylesheet" href="../../Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../Content/application.css" />
-    <link rel="stylesheet" href="../../Content/arrowsandboxes.css" />
-    <link rel="stylesheet" href="../../Content/format.css" />
+
+
+
+    <script src="@Url.Content("~/Scripts/features.js")" type=" text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/drawDashboard.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/moment.js")"></script>
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/navigataur.css")" />
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/application.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/arrowsandboxes.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/format.css")" />
 
 
 
@@ -112,7 +118,7 @@
 
                 <div class="daterange daterange--double">
                     <label style="text-align: left"> Selecet go out feature from time range</label>
-                    <script src="../../Scripts/Calendar.js"></script>
+                    <script src="@Url.Content("~/Scripts/Calendar.js")"></script>
                 </div>
                 <br />
                 <div id="visiableTable" style="width: 48%; text-align : left; float:right">

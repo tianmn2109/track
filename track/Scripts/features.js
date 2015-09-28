@@ -11,8 +11,8 @@ function getFeatureStage() {
     console.log(strSelect);
     var requestURL = createXmlHttpRequest();
    // requestURL = 'http://localhost:32020/Track/updateStageSelected';
-   requestURL = 'http://localhost:32020/Track/responseFeatures';
-     
+  // requestURL = 'http://localhost:32020/Track/responseFeatures';
+    requestURL = 'responseFeatures';
     requestURL = addURLParam(requestURL, "stage", strSelect);
     console.log(requestURL);
     var xmlhttp = new XMLHttpRequest();
@@ -22,8 +22,8 @@ function getFeatureStage() {
         {
             document.getElementById("features").style.visibility = "hidden";//显示
             //动态加载的js文件，用于将html文本转换成图形
-            path1 = "../../Scripts/arrowsandboxes.js";
-            path2 = "../../Scripts/jquery.wz_jsgraphics.js";
+            path1 = "/Scripts/arrowsandboxes.js";
+            path2 = "/Scripts/jquery.wz_jsgraphics.js";
 
             includeLinkStyle(path1);
             includeLinkStyle(path2);

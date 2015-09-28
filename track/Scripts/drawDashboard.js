@@ -3,7 +3,8 @@ function getWeeks() {
     console.log("hello for test1");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseFeatureWeeks",
+        url: "responseFeatureWeeks",
+     //   url: "/Track/responseFeatureWeeks",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -29,7 +30,8 @@ function getWeeks2() {
     console.log("hello for test1");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseFeatureWeeks",
+        url: "responseFeatureWeeks",
+       // url: "/Track/responseFeatureWeeks",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -56,7 +58,8 @@ function getPercents() {
     console.log("hello for test1");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseFeaturePercents",
+        url: "responseFeaturePercents",
+       // url: "/Track/responseFeaturePercents",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -83,7 +86,8 @@ function getFC() {
     console.log("hello for test1");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseFC",
+        url: "responseFC",
+      //  url: "/Track/responseFC",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -121,7 +125,8 @@ function getTFSRelease() {
     console.log("hello for tfs release");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseTFSRelease",
+        url: "responseTFSRelease",
+        //url: "/Track/responseTFSRelease",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -146,7 +151,8 @@ function getTFSRelease() {
 function getCommingWeek()
 {
     $.ajax({
-        url: "/Track/responseCommingTable",
+        url: "responseCommingTable",
+       // url: "/Track/responseCommingTable",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -163,7 +169,8 @@ function getCommingWeek()
 //获取本月每一周将要goout的feature
 function getGoOutWeek() {
     $.ajax({
-        url: "/Track/responseGoOutTable",
+        url: "responseGoOutTable",
+        //url: "/Track/responseGoOutTable",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -183,7 +190,8 @@ function getGoOutWeek() {
 function getPersonFeatures() {
     console.log("hello for get person f1");
     $.ajax({
-        url: "/Track/responsePersonFeature",
+        url: "responsePersonFeature",
+        //url: "/Track/responsePersonFeature",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -201,7 +209,8 @@ function getPersonFeatures() {
 function getProjFeatures() {
     console.log("hello for get person f1");
     $.ajax({
-        url: "/Track/responseFeatureAttr",
+        url: "responseFeatureAttr",
+        // url: "/Track/responseFeatureAttr",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -221,7 +230,8 @@ function getNeedResources() {
     console.log("hello for resources");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseNeedResource",
+        // url: '@Url.Action("responseNeedResource", "Track")',
+        url: "responseNeedResource" ,
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -1275,7 +1285,8 @@ function createCalendar() {
                 //   requestURL.onreadystatechange = createCommingTable();
             }
             else if (strSelect == "Go Out") {
-                requestURL = 'http://localhost:32020/Track/responseGoOutTable';
+                /*  requestURL = 'http://localhost:32020/Track/responseGoOutTable'; */
+                requestURL = 'responseGoOutTable'
                 // requestURL.onreadystatechange = createGoOutTable();
             }
             else {
@@ -1366,7 +1377,8 @@ function createCommingTable() {
     console.log("hello for comming");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseCommingTable",
+        url: "responseCommingTable",
+        //url: "/Track/responseCommingTable",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -1385,7 +1397,8 @@ function createGoOutTable() {
     console.log("hello for go out");
     // $.getJSON('./Track/getJson', function (data) {
     $.ajax({
-        url: "/Track/responseGoOutTable",
+        url: "responseGoOutTable",
+        // url: "/Track/responseGoOutTable",
         async: false,
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
