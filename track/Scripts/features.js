@@ -1,6 +1,8 @@
 ﻿var valChange = false;
+
+// 获取各个feature的状态
 function getFeatureStage() {
-    
+    //向服务器发送请求
     var e = document.getElementById("stageBox");
     console.log("---------------");
     console.log(e);
@@ -11,14 +13,15 @@ function getFeatureStage() {
    // requestURL = 'http://localhost:32020/Track/updateStageSelected';
    requestURL = 'http://localhost:32020/Track/responseFeatures';
      
-   requestURL = addURLParam(requestURL, "stage", strSelect);
+    requestURL = addURLParam(requestURL, "stage", strSelect);
     console.log(requestURL);
     var xmlhttp = new XMLHttpRequest();
-
+    // 回调函数处理服务器返回的数据
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
             document.getElementById("features").style.visibility = "hidden";//显示
+            //动态加载的js文件，用于将html文本转换成图形
             path1 = "../../Scripts/arrowsandboxes.js";
             path2 = "../../Scripts/jquery.wz_jsgraphics.js";
 
@@ -32,8 +35,8 @@ function getFeatureStage() {
             console.log("sssssssssssssssssssssssssssssss");
             console.log(sss);
             data = sss;
-           
-            setTimeout("tiem", 3000);
+
+            //解析服务器传输回来的数据
             var d = JSON.parse(data, function (key, value) {
                 //  console.log("key = %s", key);
                 //  console.log(" value = %s\n", value);
@@ -46,6 +49,7 @@ function getFeatureStage() {
             
 
             console.log(d);
+            //动态生成html文本，用于产生图形
             var features = "";
             for (var i = 0; i < d.length; i++) {
                 var feature =  "<p1 style=\"font-size:16px;\";>" + d[i]["name"] + "</p1>" + "</br>";
@@ -264,6 +268,8 @@ function getFeatureStage() {
             
             /*        */
             console.log("loop");
+            //此方式采用偷懒方法，  html由于文本先生成，而js问价加载后加载完毕所以会先显示文本后显示图形，加个延迟函数，现价在就是文件，后生成html文本
+            //先隐藏后显示
             setTimeout("changeValue()", 2000);
           //  while (valChange == false) {
           //  }

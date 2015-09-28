@@ -24,7 +24,7 @@ function getWeeks() {
     })
 
 }
-
+//获取每个feature在new active  done 三个阶段经历的时间数据  并调用画图函数画图
 function getWeeks2() {
     console.log("hello for test1");
     // $.getJSON('./Track/getJson', function (data) {
@@ -116,7 +116,7 @@ function getFC() {
     })
 
 }
-
+//获取tfs的版本号
 function getTFSRelease() {
     console.log("hello for tfs release");
     // $.getJSON('./Track/getJson', function (data) {
@@ -160,7 +160,7 @@ function getCommingWeek()
         }
     })
 }
-
+//获取本月每一周将要goout的feature
 function getGoOutWeek() {
     $.ajax({
         url: "/Track/responseGoOutTable",
@@ -172,11 +172,13 @@ function getGoOutWeek() {
             //      drawWeeks(data);
             console.log("hello for get go out week");
             console.log(data);
+            //画图函数
             drawWeeks4(data);
 
         }
     })
 }
+//每个人都在哪些feature  什么时候被释放
 
 function getPersonFeatures() {
     console.log("hello for get person f1");
@@ -195,7 +197,7 @@ function getPersonFeatures() {
         }
     })
 }
-
+//获取每个feature中每个人的release date
 function getProjFeatures() {
     console.log("hello for get person f1");
     $.ajax({
@@ -214,7 +216,7 @@ function getProjFeatures() {
         }
     })
 }
-
+//获取 每个人在哪个feature  什么时候可以被释放
 function getNeedResources() {
     console.log("hello for resources");
     // $.getJSON('./Track/getJson', function (data) {
@@ -1245,7 +1247,7 @@ function drawFeatureTable(data) {
     $("#tableFeature").append(tab);
 
 }
-
+//创建日历框，根据用户选择的时间段查询某个时间段内的goout的feature，并以表格形式展示
 function createCalendar() {
     new Calendar({
         element: $(".daterange--double"),
@@ -1253,6 +1255,7 @@ function createCalendar() {
         latest_date: new Date, start_date:new Date("May 1, 2015"),
         end_date: new Date("May 30, 2015"),
         callback: function () {
+            //起始时间
             var ee = moment(this.start_date).format("ll"),
                 a = moment(this.end_date).format("ll");
  //          console.log("Start Date: " + e + "\nEnd Date: " + a);
@@ -1265,7 +1268,8 @@ function createCalendar() {
             console.log("---------------");
             console.log(strSelect);
   */        strSelect = "Go Out";
-            var requestURL = createXmlHttpRequest();
+             var requestURL = createXmlHttpRequest();
+            //之前有goout和comming选项，现在只保留goout选项
             if (strSelect == "Comming") {
                 requestURL = 'http://localhost:32020/Track/refreshComming';
                 //   requestURL.onreadystatechange = createCommingTable();
@@ -1281,11 +1285,13 @@ function createCalendar() {
             console.log(requestURL);
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("get", requestURL, false);
+            //回调函数处理服务器返回的数据
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                  //   data = xmlhttp.responseText;
                     sss = JSON.parse(xmlhttp.responseText);
                     data = sss;
+                    //产生goout查询表格
                     goOutTable(data);
                 }
             }

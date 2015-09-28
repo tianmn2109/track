@@ -190,6 +190,7 @@
     <Content Include="Scripts\arrowsandboxes.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Calendar.js" />
     <Content Include="Scripts\drawDashboard.js" />
@@ -211,12 +212,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Track\indexT.cshtml" />
-    <Content Include="Views\Track\refresh.cshtml" />
     <Content Include="Scripts\jquery.wz_jsgraphics.js" />
-    <Content Include="Views\Track\back_schedule.cshtml" />
-    <Content Include="Views\Track\back_resource.cshtml" />
-    <None Include="Views\Track\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -252,17 +248,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Track\New.cshtml" />
-    <Content Include="Views\Track\Dogfood.cshtml" />
-    <Content Include="Views\Track\Waitting.cshtml" />
-    <Content Include="Views\Track\Prod.cshtml" />
-    <Content Include="Views\Track\Exit_review.cshtml" />
     <Content Include="Views\Track\stage.cshtml" />
-    <Content Include="Views\Track\getJson.cshtml" />
     <Content Include="Views\Track\schedule.cshtml" />
     <Content Include="Views\Track\resource.cshtml" />
     <Content Include="Views\Track\other.cshtml" />
-    <Content Include="Views\Track\main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

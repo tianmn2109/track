@@ -260,9 +260,9 @@ namespace track.Controllers
             
             return list;
         }
-
+        //返回各个feature的状态数据
         public List<Feature> getStatus(string stageSelected)
-        {/**/
+        {
             string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
@@ -486,7 +486,7 @@ namespace track.Controllers
             //return View();
 
            /* */
-       /*     List<Feature> list = new List<Feature>();
+     /*      List<Feature> list = new List<Feature>();
             for (int i = 0; i < 100; i++)
             {
                 Feature f1 = new Feature();
@@ -511,7 +511,7 @@ namespace track.Controllers
                 f1.weeks = "4";
                 list.Add(f1);
             }
-            return list;  */
+            return list;   */
         }
         public string gjson()
         {
@@ -595,7 +595,7 @@ namespace track.Controllers
             List<Feature> list = getStatus(stageSelected);/**/
             return list;
         }
-        
+        //响应服务器的查询结果， 以json格式返回数据， stageselected为 new active done  过滤器
         public string getFeatures(string stageSelected)
         {
             List<Feature> list = queryFeatures(stageSelected);
@@ -695,9 +695,9 @@ namespace track.Controllers
             
             connection.Close();
             return list;
-           
+      /*     
 
-  /*        StageWeeks f1 = new StageWeeks();
+        StageWeeks f1 = new StageWeeks();
             f1.ID = "001";
             f1.name = "feature 1";
             f1.newWeeks = "4";
@@ -723,8 +723,9 @@ namespace track.Controllers
             list.Add(f2);
             list.Add(f3);
             return list;
-              */
+       */       
         }
+        //返回每个feature在new active 和exit review 三个阶段的时间
         public ActionResult responseFeatureWeeks()
         {
             List<StageWeeks> list = queryFeatureWeeks();
@@ -767,6 +768,7 @@ namespace track.Controllers
             list.Add(f5);
             return list;
         }
+        //获取 prod 阶段的 开放程度 10% 20%等
         public ActionResult responseFeaturePercents()
         {
             List<featurePercents> list = queryFeaturePercents();
@@ -775,7 +777,7 @@ namespace track.Controllers
         }
 
 
-
+     //返回 每个人 所在的feature什么时候可以被 释放
         public ActionResult responseFC()
         {
             List<FC> list = queryFC();
@@ -885,12 +887,13 @@ namespace track.Controllers
             /*   */
         }
 
-
+        //返回本月即将go out的feature
         public ActionResult responseGoOutTable(object sender, EventArgs e)
         {
             string startDate = "";
             int s = 0;
             string endDate = "";
+            //默认是本月1号到最后一天，如果没选择日期范围的话
             if (Request.QueryString["startDate"] == null) {
                 startDate = DateTime.Now.AddDays(-DateTime.Now.Day + 1).ToString();
                 endDate = DateTime.Now.AddMonths(1).AddDays(-DateTime.Now.AddMonths(1).Day).ToString();
@@ -952,7 +955,7 @@ namespace track.Controllers
                 list.Add(go);
             }
             return list;
-           /*        GoOutTable f1 = new GoOutTable();
+      /*            GoOutTable f1 = new GoOutTable();
                      f1.featureName = "feature 1";
                      f1.goOutDate = "8, 6, 2015";
                      f1.week = 1;
@@ -989,9 +992,9 @@ namespace track.Controllers
                      list.Add(f4);
                      list.Add(f5);
                      return list;
-               */       
+         */             
         }
-
+        //模拟数据，返回tfs的版本号及对应的时间
         public ActionResult responseTFSRelease()
         {
             List<TFSRelease> list = queryTFSRelease();
@@ -1025,7 +1028,7 @@ namespace track.Controllers
             list.Add(f4);
             return list;
         }
-
+        //模拟数据， 每个人在什么时候在那个feature被释放
         public ActionResult responseNeedResource()
         {
             List<needResource> list = queryNeedResource();
@@ -1059,7 +1062,7 @@ namespace track.Controllers
             list.Add(f4);
             return list;
         }
-
+        //模拟数据，每个人在哪些feature 什么时候可以被释放
         public ActionResult responsePersonFeature()
         {
             List<personFeature> list = queryPersonFeature();
@@ -1125,7 +1128,7 @@ namespace track.Controllers
             list.Add(f3);
             return list;
         }
-
+        //返回每个feature中每个人可以被释放的时间
         public ActionResult responseFeatureAttr()
         {
             List<featureAttr> list = queryFeatureAttr();
@@ -1135,7 +1138,7 @@ namespace track.Controllers
 
         public List<featureAttr> queryFeatureAttr()
         {
-            string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
+           string coonString = @"SERVER=TFSOFFICEWH;UID=jipinshi;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=Agile-Tracking";
             SqlConnection connection = new SqlConnection(coonString);
             connection.Open();
             // MessageBox.Show("Open database success!");
@@ -1179,8 +1182,8 @@ namespace track.Controllers
                 list.Add(f1);
             }
             return list;
-            /*
-            featureAttr f1 = new featureAttr();
+            
+         /*   featureAttr f1 = new featureAttr();
             f1.featureName = "feature 1";
             f1.pair = new List<personReleasePair>();
             personReleasePair t1 = new personReleasePair();
@@ -1233,7 +1236,7 @@ namespace track.Controllers
             list.Add(f2);
             list.Add(f3);
             return list;
-            */
+       */     
         }
     }
 
